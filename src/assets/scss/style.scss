@@ -1,0 +1,41 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+@import "variables";
+@import "layouts/transitions";
+@import "helpers/color";
+@import "helpers/icon-size";
+
+//Theme colors
+
+@import "themecolors/default_theme";
+@include mat.all-component-themes($bluetheme);
+
+//container layout
+@import "overrides/materialoverrides";
+@import "container";
+@import "layouts/layouts";
+@import "grid/grid";
+@import "helpers/custom-flex";
+@import "helpers/index";
+
+
+// pages
+@import "pages/dashboards";
+@import "pages/auth";
+
+/* src/styles.css or src/styles.scss */
+.snackbar-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.snackbar-error {
+  background-color: #f44336;
+  color: white;
+}
+
+.snackbar-info {
+  background-color: #2196f3;
+  color: white;
+}

@@ -1,0 +1,103 @@
+<mat-dialog-content>
+  <h2>Demande de Crédit</h2>
+  <form [formGroup]="creditDemandForm" (ngSubmit)="onSubmit()">
+    <!-- Account Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Compte</mat-label>
+      <mat-select formControlName="account">
+        <mat-option *ngFor="let account of data.accounts" [value]="account.account_number">
+          {{ account.account_number }} - {{ account.account_label }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="creditDemandForm.get('account')!.hasError('required')">
+        Compte is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Product Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Produit</mat-label>
+      <mat-select formControlName="product">
+        <mat-option *ngFor="let product of products" [value]="product">
+          {{ product }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="creditDemandForm.get('product')!.hasError('required')">
+        Produit is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Salary Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Salaire (en dinars)</mat-label>
+      <input matInput type="number" formControlName="salary" placeholder="Enter salary">
+      <mat-error *ngIf="creditDemandForm.get('salary')!.hasError('required')">
+        Salaire is required
+      </mat-error>
+      <mat-error *ngIf="creditDemandForm.get('salary')!.hasError('min')">
+        Salaire must be greater than zero
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Retenue Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Retenue (en dinars)</mat-label>
+      <input matInput type="number" formControlName="retenue" placeholder="Enter retenue">
+      <mat-error *ngIf="creditDemandForm.get('retenue')!.hasError('required')">
+        Retenue is required
+      </mat-error>
+      <mat-error *ngIf="creditDemandForm.get('retenue')!.hasError('min')">
+        Retenue must be greater than zero
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Duration Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Durée (en mois)</mat-label>
+      <input matInput type="number" formControlName="duration" placeholder="Enter duration">
+      <mat-error *ngIf="creditDemandForm.get('duration')!.hasError('required')">
+        Durée is required
+      </mat-error>
+      <mat-error *ngIf="creditDemandForm.get('duration')!.hasError('min')">
+        Durée must be greater than zero
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Start Date Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Date de début</mat-label>
+      <input matInput type="date" formControlName="startDate">
+      <mat-error *ngIf="creditDemandForm.get('startDate')!.hasError('required')">
+        Date de début is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- End Date Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Date de fin</mat-label>
+      <input matInput type="date" formControlName="endDate">
+      <mat-error *ngIf="creditDemandForm.get('endDate')!.hasError('required')">
+        Date de fin is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Periodicity Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Période</mat-label>
+      <mat-select formControlName="periodicity">
+        <mat-option *ngFor="let periodicity of periodicities" [value]="periodicity">
+          {{ periodicity }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="creditDemandForm.get('periodicity')!.hasError('required')">
+        Période is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Demander</button>
+      <button mat-raised-button color="accent" type="button" (click)="close()">Annuler</button>
+    </div>
+  </form>
+</mat-dialog-content>

@@ -1,0 +1,104 @@
+<div class="simulateur-credit">
+  <mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">Simulateur de Crédit</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+      <form [formGroup]="creditForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Compte</mat-label>
+          <mat-select formControlName="account">
+            <mat-option *ngFor="let account of accounts" [value]="account.account_number">
+              {{ account.account_number }} - {{ account.account_label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="creditForm.get('account')!.hasError('required')">
+            Compte is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Produit</mat-label>
+          <mat-select formControlName="product">
+            <mat-option *ngFor="let product of products" [value]="product">
+              {{ product }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="creditForm.get('product')!.hasError('required')">
+            Produit is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Montant demandé (en dinars)</mat-label>
+          <input matInput type="number" formControlName="amount" placeholder="Enter amount">
+          <mat-error *ngIf="creditForm.get('amount')!.hasError('required')">
+            Montant is required
+          </mat-error>
+          <mat-error *ngIf="creditForm.get('amount')!.hasError('min')">
+            Montant must be greater than zero
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Périodicité</mat-label>
+          <mat-select formControlName="periodicity">
+            <mat-option *ngFor="let periodicity of periodicities" [value]="periodicity">
+              {{ periodicity }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="creditForm.get('periodicity')!.hasError('required')">
+            Périodicité is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Durée (exprimée en nombre de périodes)</mat-label>
+          <input matInput type="number" formControlName="duration" placeholder="Enter duration">
+          <mat-error *ngIf="creditForm.get('duration')!.hasError('required')">
+            Durée is required
+          </mat-error>
+          <mat-error *ngIf="creditForm.get('duration')!.hasError('min')">
+            Durée must be greater than zero
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Taux d’intérêt : TMM+5%</mat-label>
+          <input matInput type="text" formControlName="interestRate" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Date première échéance</mat-label>
+          <input matInput type="date" formControlName="firstDueDate" placeholder="Select first due date">
+          <mat-error *ngIf="creditForm.get('firstDueDate')!.hasError('required')">
+            Date première échéance is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Calculer</button>
+          <button mat-raised-button color="accent" type="button" (click)="onReset()">Réinitialiser</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="simulationResult" class="simulation-result">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <div class="result-text">
+          <p>
+            Vous avez demandé la somme de <strong>{{ simulationResult.requested_amount }} DT</strong>.<br>
+            Chaque période, vous allez rembourser : <strong>{{ simulationResult.installment_amount }} DT</strong><br>
+            de la date première échéance <strong>{{ simulationResult.start_date | date }}</strong> à la date fin échéance <strong>{{ simulationResult.end_date | date }}</strong>.
+          </p>
+          <p class="disclaimer">
+            Cette simulation est à caractère indicatif sans valeur contractuelle<br>
+            Le déblocage du crédit se fait sur la base des termes de la décision et après parfaite constitution des garanties.
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

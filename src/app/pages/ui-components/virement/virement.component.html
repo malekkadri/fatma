@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col-lg-8">
+    <mat-card class="cardWithShadow theme-card">
+      <mat-card-header>
+        <mat-card-title class="m-b-0">Transactions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <table mat-table [dataSource]="transactionDataSource" class="mat-elevation-z8">
+          <!-- Transaction ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+          </ng-container>
+
+          <!-- From Account Column -->
+          <ng-container matColumnDef="from_account">
+            <th mat-header-cell *matHeaderCellDef> From Account </th>
+            <td mat-cell *matCellDef="let element"> {{ element.from_account }} </td>
+          </ng-container>
+
+          <!-- To Account Column -->
+          <ng-container matColumnDef="to_account">
+            <th mat-header-cell *matHeaderCellDef> To Account </th>
+            <td mat-cell *matCellDef="let element"> {{ element.to_account }} </td>
+          </ng-container>
+
+          <!-- Amount Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{ element.amount }} </td>
+          </ng-container>
+
+          <!-- Transaction Date Column -->
+          <ng-container matColumnDef="transaction_date">
+            <th mat-header-cell *matHeaderCellDef> Transaction Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.transaction_date | date }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="transactionDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: transactionDisplayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="cardWithShadow theme-card">
+      <mat-card-header>
+        <mat-card-title class="m-b-0">Virement compte à compte</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <form [formGroup]="virementForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Compte à débiter:</mat-label>
+            <mat-select formControlName="sourceAccount">
+              <mat-option *ngFor="let account of accounts" [value]="account.account_number">
+                {{ account.account_number }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="virementForm.get('sourceAccount')!.hasError('required')">
+              Source account is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Devise:</mat-label>
+            <mat-select formControlName="currency">
+              <mat-option value="TND">TND</mat-option>
+              <!-- Add other currencies if needed -->
+            </mat-select>
+            <mat-error *ngIf="virementForm.get('currency')!.hasError('required')">
+              Currency is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Compte à créditer:</mat-label>
+            <input matInput formControlName="targetAccount" placeholder="Enter target account">
+            <mat-error *ngIf="virementForm.get('targetAccount')!.hasError('required')">
+              Target account is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Montant:</mat-label>
+            <input matInput formControlName="amount" type="number" placeholder="Enter amount">
+            <mat-error *ngIf="virementForm.get('amount')!.hasError('required')">
+              Amount is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Motif paiement:</mat-label>
+            <textarea matInput formControlName="paymentReason" placeholder="Enter payment reason"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Date d'exécution:</mat-label>
+            <input matInput formControlName="executionDate" [matDatepicker]="picker" placeholder="Select execution date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="virementForm.get('executionDate')!.hasError('required')">
+              Execution date is required
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">Continuer</button>
+            <button mat-raised-button color="accent" type="button" (click)="onReset()">Retour</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <mat-card-title>Virement</mat-card-title>
+        <div class="m-t-24">
+          <nav>
+            <ul style="list-style-type: none; padding: 0;">
+              <li *ngFor="let item of virementLinks" style="padding: 10px 0;">
+                <span style="display: inline-block; width: 10px; height: 10px; background-color: green; margin-right: 10px;"></span>
+                <a [href]="item.link">{{ item.text }}</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+.simulateur-credit {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.cardWithShadow {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.m-b-0 {
+  margin-bottom: 0;
+}
+
+.b-t-1 {
+  border-top: 1px solid #e0e0e0;
+}
+
+.p-24 {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-actions .btn {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.simulation-result {
+  margin-top: 20px;
+}
+
+.result-text {
+  text-align: center;
+}
+
+.result-text p {
+  margin: 0;
+  padding: 0;
+}
+
+.disclaimer {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #666;
+}

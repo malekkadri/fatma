@@ -1,0 +1,51 @@
+<div class="row">
+  <!-- Login Statistics -->
+  <div class="col-lg-12">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <apx-chart
+          [series]="loginChartOptions.series"
+          [chart]="loginChartOptions.chart"
+          [xaxis]="loginChartOptions.xaxis"
+          [yaxis]="loginChartOptions.yaxis"
+          [stroke]="loginChartOptions.stroke"
+          [dataLabels]="loginChartOptions.dataLabels"
+          [title]="loginChartOptions.title"
+        ></apx-chart>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Transaction Statistics -->
+  <div class="col-lg-12">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <apx-chart
+          [series]="transactionChartOptions.series"
+          [chart]="transactionChartOptions.chart"
+          [xaxis]="transactionChartOptions.xaxis"
+          [yaxis]="transactionChartOptions.yaxis"
+          [dataLabels]="transactionChartOptions.dataLabels"
+          [annotations]="transactionChartOptions.annotations"
+          [title]="transactionChartOptions.title"
+          [plotOptions]="transactionChartOptions.plotOptions"
+        ></apx-chart>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Credit Simulation Statistics -->
+  <div class="col-lg-12">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <apx-chart
+          [series]="creditSimulationChartOptions.series"
+          [chart]="creditSimulationChartOptions.chart"
+          [labels]="creditSimulationChartOptions.labels"
+          [responsive]="creditSimulationChartOptions.responsive"
+          [title]="creditSimulationChartOptions.title"
+        ></apx-chart>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

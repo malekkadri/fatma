@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-lg-12">
+    <mat-card class="cardWithShadow theme-card">
+      <mat-card-header>
+        <mat-card-title>Add Bank Account</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="p-24">
+        <form [formGroup]="bankAccountForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="account_number" placeholder="Enter Account Number">
+            <mat-error *ngIf="bankAccountForm.get('account_number')!.hasError('required')">
+              Account Number is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Account Label</mat-label>
+            <input matInput formControlName="account_label" placeholder="Enter Account Label">
+            <mat-error *ngIf="bankAccountForm.get('account_label')!.hasError('required')">
+              Account Label is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Balance Date</mat-label>
+            <input matInput formControlName="balance_date" [matDatepicker]="picker" placeholder="Select Balance Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="bankAccountForm.get('balance_date')!.hasError('required')">
+              Balance Date is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Currency</mat-label>
+            <input matInput formControlName="currency" placeholder="Enter Currency">
+            <mat-error *ngIf="bankAccountForm.get('currency')!.hasError('required')">
+              Currency is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Current Balance</mat-label>
+            <input matInput formControlName="current_balance" type="number" placeholder="Enter Current Balance">
+            <mat-error *ngIf="bankAccountForm.get('current_balance')!.hasError('required')">
+              Current Balance is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User</mat-label>
+            <mat-select formControlName="user_id">
+              <mat-option *ngFor="let user of users" [value]="user.id">
+                {{ user.username }} ({{ user.national_id }})
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="bankAccountForm.get('user_id')!.hasError('required')">
+              User is required
+            </mat-error>
+          </mat-form-field>
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">
+              Add Bank Account
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

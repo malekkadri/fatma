@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-lg-8">
+    <mat-card class="cardWithShadow theme-card">
+      <mat-card-header>
+        <mat-card-title>Virement compte à plusieurs comptes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <form [formGroup]="virementForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Compte à débiter</mat-label>
+            <mat-select formControlName="sourceAccount">
+              <mat-option *ngFor="let account of accounts" [value]="account.account_number">
+                {{ account.account_number }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="virementForm.get('sourceAccount')!.hasError('required')">
+              Source account is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Devise</mat-label>
+            <mat-select formControlName="currency">
+              <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="virementForm.get('currency')!.hasError('required')">
+              Currency is required
+            </mat-error>
+          </mat-form-field>
+
+          <div formArrayName="targetAccounts">
+            <div *ngFor="let target of targetAccounts.controls; let i = index" [formGroupName]="i" class="form-group">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Compte à créditer</mat-label>
+                <input matInput formControlName="targetAccount" placeholder="Enter target account">
+                <mat-error *ngIf="target.get('targetAccount')!.hasError('required')">
+                  Target account is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Montant</mat-label>
+                <input matInput formControlName="amount" type="number" placeholder="Enter amount">
+                <mat-error *ngIf="target.get('amount')!.hasError('required')">
+                  Amount is required
+                </mat-error>
+              </mat-form-field>
+
+              <button mat-button color="warn" (click)="removeTargetAccount(i)">Remove</button>
+            </div>
+          </div>
+
+          <button mat-raised-button color="primary" type="button" (click)="addTargetAccount()">Add Account</button>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Motif paiement</mat-label>
+            <textarea matInput formControlName="paymentReason" placeholder="Enter payment reason"></textarea>
+            <mat-error *ngIf="virementForm.get('paymentReason')!.hasError('required')">
+              Payment reason is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Date d'exécution</mat-label>
+            <input matInput type="date" formControlName="executionDate">
+            <mat-error *ngIf="virementForm.get('executionDate')!.hasError('required')">
+              Execution date is required
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">Continuer</button>
+            <button mat-raised-button color="accent" type="button" (click)="onReset()">Retour</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <mat-card-title>Virement</mat-card-title>
+        <div class="m-t-24">
+          <nav>
+            <ul style="list-style-type: none; padding: 0;">
+              <li *ngFor="let item of virementLinks" style="padding: 10px 0;">
+                <span style="display: inline-block; width: 10px; height: 10px; background-color: green; margin-right: 10px;"></span>
+                <a [href]="item.link">{{ item.text }}</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Ouverture</th>
+          <th>+Haut</th>
+          <th>Variation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stockData">
+          <td>{{ stock.nom }}</td>
+          <td>{{ stock.ouverture }}</td>
+          <td>{{ stock.haut }}</td>
+          <td>{{ stock.variation }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-lg-4">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <mat-card-title>Change Bourse</mat-card-title>
+        <div class="m-t-24">
+          <nav>
+            <ul style="list-style-type: none; padding: 0;">
+              <li style="padding: 10px 0;">
+                <span style="display: inline-block; width: 10px; height: 10px; background-color: green; margin-right: 10px;"></span>
+                <a href="http://localhost:4200/bank/change">Change</a>
+              </li>
+              <li style="padding: 10px 0;">
+                <span style="display: inline-block; width: 10px; height: 10px; background-color: green; margin-right: 10px;"></span>
+                <a href="http://localhost:4200/bank/bourse">Bourse</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

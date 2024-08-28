@@ -1,0 +1,109 @@
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-lg-8,
+.col-lg-4 {
+  padding: 10px;
+}
+
+.col-lg-8 {
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
+}
+
+.col-lg-4 {
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%;
+}
+
+.cardWithShadow {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.m-b-0 {
+  margin-bottom: 0;
+}
+
+.b-t-1 {
+  border-top: 1px solid #e0e0e0;
+}
+
+.p-24 {
+  padding: 24px;
+}
+
+.m-t-24 {
+  margin-top: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-actions .btn {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul ul {
+  padding-left: 20px;
+}
+
+nav li {
+  padding: 10px 0;
+}
+
+nav li span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  margin-right: 10px;
+}
